@@ -20,7 +20,6 @@ void addNode(int value)
     newNode->high = NULL;
     newNode->low = NULL;
 
-    // challange is to add node to tree
 
     if (!rootNode)
     {
@@ -28,13 +27,47 @@ void addNode(int value)
         return;
     }
 
-    if (newNode->value < rootNode->value)
+    NODE *trav = rootNode;
+    while (true)
     {
-        rootNode->low = newNode;
+        if (newNode->value < trav->value)
+        {
+            // checks to see if there is a trav->low value
+            if (!trav->low)
+            {
+                trav->low = newNode;
+                return;
+            }
+            // if there is already a value at trav->low than we need to go down a level and restart the loop
+            trav = trav->low;
+            continue;
+        }
+        else
+        {
+            if (!trav->high)
+            {
+                trav->high = newNode;
+                return;
+            }
+            trav = trav->high;
+            continue;
+        }
     }
-    rootNode->high = newNode;
 }
 
+void displayTreeOnEnter(NODE *curNode)
+{
+    printf("%i, ", curNode->value);
+
+    if (curNode->low)
+    {
+        displayTreeOnEnter(curNode->low);
+    }
+    if (curNode->high)
+    {
+        displayTreeOnEnter(curNode->high);
+    }
+}
 
 
 int main(void)
@@ -43,4 +76,16 @@ int main(void)
     addNode(10);
     addNode(8);
     addNode(15);
+    addNode(17);
+    addNode(20);
+    addNode(18);
+    addNode(5);
+    addNode(6);
+    addNode(9);
+    addNode(4);
+    addNode(13);
+    addNode(7);
+
+    displayTreeOnEnter(rootNode);
+    printf("\n");
 }
