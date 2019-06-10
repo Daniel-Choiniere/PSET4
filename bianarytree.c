@@ -69,6 +69,19 @@ void displayTreeOnEnter(NODE *curNode)
     }
 }
 
+void displayTreeOnDeparture(NODE *curNode)
+{
+    // 4 7 6 5 9 8 13 18 20 17 15 10
+
+}
+
+int doesContain(int value)
+{
+    // search the tree
+    // return 0 if the value is not in the tree
+    // return 1 if the value does exist in the tree
+}
+
 
 int main(void)
 {
@@ -89,3 +102,6 @@ int main(void)
     displayTreeOnEnter(rootNode);
     printf("\n");
 }
+
+
+// display node values on departure
