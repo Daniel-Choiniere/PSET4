@@ -94,21 +94,26 @@ int doesContain(int value)
     {
         if (value == rootNode->value)
         {
-            printf("It's here!");
+            printf("It's here!\n");
             return 1;
         }
-        else if (value == rootNode->value->high)
+        else if (value == rootNode->high->value)
         {
+            printf("It's here!\n");
             return 1;
         }
-        else if (value == rootNode->value->low)
+        else if (value == rootNode->low->value)
         {
+            printf("It's here!\n");
             return 1;
         }
     }
-    printf("It's not here!");
+    printf("It's not here!\n");
     return 0;
 }
+
+
+
 
 int main(void)
 {
@@ -130,6 +135,11 @@ int main(void)
     // displayTreeOnDeparture(rootNode);
 
     doesContain(10);
+    doesContain(8);
+    doesContain(15);
+    doesContain(29);
+    doesContain(33);
+    doesContain(12);
     printf("\n");
 }
 
