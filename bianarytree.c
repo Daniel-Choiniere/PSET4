@@ -73,15 +73,42 @@ void displayTreeOnDeparture(NODE *curNode)
 {
     // 4 7 6 5 9 8 13 18 20 17 15 10
 
+    if (curNode->low)
+    {
+        displayTreeOnDeparture(curNode->low);
+    }
+    if (curNode->high)
+    {
+        displayTreeOnDeparture(curNode->high);
+    }
+    printf("%i, ", curNode->value);
 }
+
 
 int doesContain(int value)
 {
+    // can use the global rootNode
     // search the tree
-    // return 0 if the value is not in the tree
-    // return 1 if the value does exist in the tree
+    // return 0 if the value is not in the tree, return 1 if the value does exist in the tree
+    if (rootNode)
+    {
+        if (value == rootNode->value)
+        {
+            printf("It's here!");
+            return 1;
+        }
+        else if (value == rootNode->value->high)
+        {
+            return 1;
+        }
+        else if (value == rootNode->value->low)
+        {
+            return 1;
+        }
+    }
+    printf("It's not here!");
+    return 0;
 }
-
 
 int main(void)
 {
@@ -99,7 +126,10 @@ int main(void)
     addNode(13);
     addNode(7);
 
-    displayTreeOnEnter(rootNode);
+    // displayTreeOnEnter(rootNode);
+    // displayTreeOnDeparture(rootNode);
+
+    doesContain(10);
     printf("\n");
 }
 
