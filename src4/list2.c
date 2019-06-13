@@ -29,6 +29,7 @@ int main(void)
 
         // Allocate space for number
         node *n = malloc(sizeof(node));
+        // if memory is not available
         if (!n)
         {
             return 1;
