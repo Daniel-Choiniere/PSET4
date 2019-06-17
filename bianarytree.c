@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cs50.h>
+#include <assert.h>
 
 // create NODE for bianary tree
 
@@ -90,30 +91,39 @@ int doesContain(int value)
     // can use the global rootNode
     // search the tree
     // return 0 if the value is not in the tree, return 1 if the value does exist in the tree
-    if (rootNode)
+
+
+    NODE *trav = rootNode;
+    while (1)
     {
-        if (value == rootNode->value)
+        if (trav->value == value)
         {
-            printf("It's here!\n");
+            // printf("Its here\n");
             return 1;
         }
-        else if (value == rootNode->high->value)
+        if (value < trav->value)
         {
-            printf("It's here!\n");
-            return 1;
+            if (!trav->low)
+            {
+                return 0;
+            }
+            trav = trav->low;
+            continue;
         }
-        else if (value == rootNode->low->value)
+        if (!trav->high)
         {
-            printf("It's here!\n");
-            return 1;
+            return 0;
         }
+        trav = trav->high;
+        continue;
     }
-    printf("It's not here!\n");
-    return 0;
 }
 
-
-
+void tests()
+{
+    assert(!doesContain(100));
+    assert(doesContain(7));
+}
 
 int main(void)
 {
@@ -131,17 +141,7 @@ int main(void)
     addNode(13);
     addNode(7);
 
-    // displayTreeOnEnter(rootNode);
-    // displayTreeOnDeparture(rootNode);
-
-    doesContain(10);
-    doesContain(8);
-    doesContain(15);
-    doesContain(29);
-    doesContain(33);
-    doesContain(12);
-    printf("\n");
+    tests();
 }
 
 
-// display node values on departure
