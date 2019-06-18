@@ -144,4 +144,4 @@ int main(void)
     tests();
 }
 
-
+// for homework - free all the nodes on the tree
