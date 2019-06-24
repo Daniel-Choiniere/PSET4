@@ -14,7 +14,7 @@ typedef struct NODE
 
 NODE *rootNode;
 
-NODE *headNode;
+QUENODE *headNode;
 
 typedef struct QUENODE
 {
