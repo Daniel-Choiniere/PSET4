@@ -25,7 +25,6 @@ int add(int *x, int y)
 // iterate through the linked list until you get to the end
 // once at end print out last value
 // once at the end add the new node to the list
-
 void addNode(int value)
 {
     NODE *newNode = malloc(sizeof(NODE));

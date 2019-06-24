@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <cs50.h>
 #include <assert.h>
 
-// create NODE for bianary tree
-
+//minichallenge create the NODE for a binary tree.
 typedef struct NODE
 {
     int value;
@@ -14,51 +12,46 @@ typedef struct NODE
 
 NODE *rootNode;
 
-NODE *headNode;
-
-typedef struct QUENODE
-{
-    NODE *value;
-    struct QUENODE *next;
-} QUENODE;
-
-
 void addNode(int value)
 {
-    NODE *newNode =  malloc(sizeof(NODE));
+    NODE *newNode = malloc(sizeof(NODE));
     newNode->value = value;
     newNode->high = NULL;
     newNode->low = NULL;
 
-
-    if (!rootNode)
+    if (rootNode == NULL)
     {
         rootNode = newNode;
         return;
     }
 
+    // if value of new node is less the root node attach to low
+    // else add to high.
     NODE *trav = rootNode;
-    while (true)
+    // printf("trying to add node %i\n", newNode->value);
+    while(1)
     {
         if (newNode->value < trav->value)
         {
-            // checks to see if there is a trav->low value
-            if (!trav->low)
+            if (trav->low == NULL)
             {
+                // printf("found empty spot\n");
                 trav->low = newNode;
                 return;
             }
-            // if there is already a value at trav->low than we need to go down a level and restart the loop
+            // printf("found a low node valued: %i moving to it\n", trav->low->value);
             trav = trav->low;
             continue;
         }
         else
         {
-            if (!trav->high)
+            if (trav->high == NULL)
             {
+                // printf("found empty spot\n");
                 trav->high = newNode;
                 return;
             }
+            // printf("found a high node valued: %i moving to it\n", trav->high->value);
             trav = trav->high;
             continue;
         }
@@ -67,12 +60,13 @@ void addNode(int value)
 
 void displayTreeOnEnter(NODE *curNode)
 {
-    printf("%i, ", curNode->value);
+    printf("%i ", curNode->value);
 
     if (curNode->low)
     {
         displayTreeOnEnter(curNode->low);
     }
+
     if (curNode->high)
     {
         displayTreeOnEnter(curNode->high);
@@ -81,38 +75,41 @@ void displayTreeOnEnter(NODE *curNode)
 
 void displayTreeOnDeparture(NODE *curNode)
 {
-    // 4 7 6 5 9 8 13 18 20 17 15 10
+    //4 7 6 5 9 8 13 18 20 17 15 10
 
     if (curNode->low)
     {
-        displayTreeOnDeparture(curNode->low);
+        displayTreeOnEnter(curNode->low);
     }
+
     if (curNode->high)
     {
-        displayTreeOnDeparture(curNode->high);
+        displayTreeOnEnter(curNode->high);
     }
-    printf("%i, ", curNode->value);
-}
 
+    printf("%i ", curNode->value);
+}
 
 int doesContain(int value)
 {
-    // can use the global rootNode
     // search the tree
-    // return 0 if the value is not in the tree, return 1 if the value does exist in the tree
+    // return 0 if value is not in the tree
+    // return 1 if value does exist in the tree
 
-
+    // if (rootNode->value == value)
+    // {
+    //     return 1;
+    // }
     NODE *trav = rootNode;
-    while (1)
+    while(1)
     {
         if (trav->value == value)
         {
-            // printf("Its here\n");
             return 1;
         }
         if (value < trav->value)
         {
-            if (!trav->low)
+            if (trav->low == NULL)
             {
                 return 0;
             }
@@ -130,13 +127,20 @@ int doesContain(int value)
 
 void tests()
 {
-    assert(!doesContain(100));
-    assert(doesContain(7));
+    assert(doesContain(10) && "tree does contain 10");
+    assert(doesContain(8) && "tree does contain 8");
+    assert(doesContain(4) && "tree does contain 4");
+    assert(!doesContain(1) && "tree does not contain 1");
+    assert(doesContain(15) && "tree does contain 15");
+    assert(!doesContain(100) && "Tree does not contain 100");
+    assert(doesContain(13) && "tree does contain 13");
+    assert(doesContain(7) && "tree does contain 7");
+    assert(!doesContain(16) && "tree does not contain 16");
 }
 
 int main(void)
 {
-    // printf("Hello World\n");
+    printf("hello\n");
     addNode(10);
     addNode(8);
     addNode(15);
@@ -154,6 +158,7 @@ int main(void)
 
     displayTreeOnEnter(rootNode);
     printf("\n");
-}
 
-// for homework - free all the nodes on the tree
+    // printf("%i\t%i\n", rootNode->low->value, rootNode->high->value);
+
+}

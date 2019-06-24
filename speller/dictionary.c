@@ -1,9 +1,8 @@
 // Implements a dictionary's functionality
-#include <stdlib.h>
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
 
 #include "dictionary.h"
 
@@ -18,8 +17,7 @@ typedef struct node
 }
 node;
 
-
-// Global Array Represents a hash table
+// Represents a hash table
 node *hashtable[N];
 
 // Hashes word to a number between 0 and 25, inclusive, based on its first letter
@@ -48,19 +46,10 @@ bool load(const char *dictionary)
     // Buffer for a word
     char word[LENGTH + 1];
 
-    // Insert words into hash table unitl End Of File
+    // Insert words into hash table
     while (fscanf(file, "%s", word) != EOF)
     {
         // TODO
-        // malloc will give us a pointer to a spot in memory to store each char array (linked list) for each bucket
-        node *newNode = malloc(sizeof(node));
-
-        strcpy(newNode->word, word);
-        printf("Hello World");
-        printf("%s", newNode->word);
-        newNode->next = NULL;
-
-        return newNode;
     }
 
     // Close dictionary
