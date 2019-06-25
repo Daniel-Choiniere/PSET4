@@ -3,7 +3,8 @@
 #include <cs50.h>
 #include <assert.h>
 
-// create NODE for bianary tree
+// create our POP (returns the element removed, i.e. removeNode) and PUSH (i.e. addNode) for our que
+// create length and peak if possible
 
 typedef struct NODE
 {
@@ -14,13 +15,21 @@ typedef struct NODE
 
 NODE *rootNode;
 
-QUENODE *headNode;
+NODE *headNode;
 
 typedef struct QUENODE
 {
     NODE *value;
     struct QUENODE *next;
 } QUENODE;
+
+void addToQue(QUENODE *value)
+{
+    QUENODE *temp = malloc(sizeof(QUENODE));
+    temp->value = value;
+    temp->next = *headNode;
+    *headNode = temp;
+}
 
 
 void addNode(int value)
@@ -137,22 +146,27 @@ void tests()
 int main(void)
 {
     // printf("Hello World\n");
-    addNode(10);
-    addNode(8);
-    addNode(15);
-    addNode(17);
-    addNode(20);
-    addNode(18);
-    addNode(5);
-    addNode(6);
-    addNode(9);
-    addNode(4);
-    addNode(13);
-    addNode(7);
+    // addNode(10);
+    // addNode(8);
+    // addNode(15);
+    // addNode(17);
+    // addNode(20);
+    // addNode(18);
+    // addNode(5);
+    // addNode(6);
+    // addNode(9);
+    // addNode(4);
+    // addNode(13);
+    // addNode(7);
+
+    addToQue(10);
+    addToQue(15);
+    addtoQue(17);
+
 
     tests();
 
-    displayTreeOnEnter(rootNode);
+    // displayTreeOnEnter(rootNode);
     printf("\n");
 }
 
