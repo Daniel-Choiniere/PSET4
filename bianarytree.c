@@ -155,9 +155,11 @@ int main(void)
     addNode(7);
 
     push(rootNode);
+    push(rootNode->low);
+    push(rootNode->high);
 
-
-
+    printf("%i\n", pop()->value);
+    printf("%i\n", pop()->value);
     tests();
 
     // displayTreeOnEnter(rootNode);
@@ -183,10 +185,15 @@ void push(NODE* address)
     trav->next = newQNode;
 }
 
+// temp storage for the headNode
 // reassign the headNode
 // return the address of a bi-NODE
 NODE* pop()
 {
-    return 0x0;
+    NODE *temp = headNode->node;
+    QNODE *qTemp = headNode;
+    headNode = qTemp->next;
+    free(qTemp);
+    return temp->node;
 }
-// for homework - free all the nodes on the tree
+
