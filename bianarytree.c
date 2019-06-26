@@ -13,24 +13,18 @@ typedef struct NODE
     struct NODE *high;
 } NODE;
 
+typedef struct QNODE
+{
+    NODE *node;
+    struct QNODE *next;
+} QNODE;
+
 NODE *rootNode;
+QNODE *headNode;
 
-NODE *headNode;
-
-typedef struct QUENODE
-{
-    NODE *value;
-    struct QUENODE *next;
-} QUENODE;
-
-void addToQue(QUENODE *value)
-{
-    QUENODE *temp = malloc(sizeof(QUENODE));
-    temp->value = value;
-    temp->next = *headNode;
-    *headNode = temp;
-}
-
+// function declerations
+NODE* pop();
+void push();
 
 void addNode(int value)
 {
@@ -146,22 +140,22 @@ void tests()
 int main(void)
 {
     // printf("Hello World\n");
-    // addNode(10);
-    // addNode(8);
-    // addNode(15);
-    // addNode(17);
-    // addNode(20);
-    // addNode(18);
-    // addNode(5);
-    // addNode(6);
-    // addNode(9);
-    // addNode(4);
-    // addNode(13);
-    // addNode(7);
 
-    addToQue(10);
-    addToQue(15);
-    addtoQue(17);
+    addNode(10);
+    addNode(8);
+    addNode(15);
+    addNode(17);
+    addNode(20);
+    addNode(18);
+    addNode(5);
+    addNode(6);
+    addNode(9);
+    addNode(4);
+    addNode(13);
+    addNode(7);
+
+    push(rootNode);
+
 
 
     tests();
@@ -170,4 +164,29 @@ int main(void)
     printf("\n");
 }
 
+void push(NODE* address)
+{
+    QNODE *newQNode = malloc(sizeof(QNODE));
+    newQNode->node = address;
+    newQNode->next = NULL;
+    if (headNode == NULL)
+    {
+        headNode = newQNode;
+        return;
+    }
+    QNODE *trav = headNode;
+    while(trav->next != NULL)
+    {
+        trav = trav->next;
+    }
+
+    trav->next = newQNode;
+}
+
+// reassign the headNode
+// return the address of a bi-NODE
+NODE* pop()
+{
+    return 0x0;
+}
 // for homework - free all the nodes on the tree
