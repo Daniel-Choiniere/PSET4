@@ -3,8 +3,13 @@
 #include <cs50.h>
 #include <assert.h>
 
-// create our POP (returns the element removed, i.e. removeNode) and PUSH (i.e. addNode) for our que
-// create length and peak if possible
+// display level
+    // start at root
+    // add any child nodes to queue - low than high (using push)
+    // print the node I am on
+    // get the next item i the queue
+        // add any child node to queue
+
 
 typedef struct NODE
 {
