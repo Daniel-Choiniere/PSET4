@@ -134,7 +134,7 @@ int main(void)
     addNode(17);
     displayList();
     // removeNode(17);
-    // displayList();
+
 
     // freeListFunction();
     freeListSelf(rootNode);

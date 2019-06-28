@@ -3,13 +3,6 @@
 #include <cs50.h>
 #include <assert.h>
 
-// display level
-    // start at root
-    // add any child nodes to queue - low than high (using push)
-    // print the node I am on
-    // get the next item i the queue
-        // add any child node to queue
-
 
 typedef struct NODE
 {
@@ -30,6 +23,7 @@ QNODE *headNode;
 // function declerations
 NODE* pop();
 void push();
+void displayQueue();
 
 void addNode(int value)
 {
@@ -163,9 +157,11 @@ int main(void)
     push(rootNode->low);
     push(rootNode->high);
 
-    printf("%i\n", pop()->value);
-    printf("%i\n", pop()->value);
+    // printf("%i\n", pop()->value);
+    // printf("%i\n", pop()->value);
     tests();
+
+    displayQueue();
 
     // displayTreeOnEnter(rootNode);
     printf("\n");
@@ -199,6 +195,36 @@ NODE* pop()
     QNODE *qTemp = headNode;
     headNode = qTemp->next;
     free(qTemp);
-    return temp->node;
+    return temp;
 }
 
+
+// display level
+    // start at rootnode
+        // init level to one
+    // add any child nodes to queue - low than high (using push) (send address and level)
+    // print the node I am on
+    // pop() (check to see if we are on a new level if popped level == level wea re now on a new level)
+        // increment level counter
+        // print a new line
+            // go back to line 205
+    // get the next item i the queue
+        // add any child node to queue
+
+void displayQueue()
+{
+    printf("%i\n", rootNode->value);
+    while (rootNode)
+    {
+        if (rootNode->low != NULL)
+        {
+            push(rootNode->low);
+        }
+
+        if (rootNode->high != NULL)
+        {
+             push(rootNode->high);
+        }
+        printf("%i\n", pop()->value);
+    }
+}
